@@ -1,0 +1,150 @@
+html {
+	box-sizing : border-box;
+}
+
+*, *:before, *:after {
+	box-sizing : inherit;
+}
+
+.visuallyhidden {
+	border   : 0;
+	clip     : rect(0 0 0 0);
+	height   : 1px;
+	margin   : -1px;
+	overflow : hidden;
+	padding  : 0;
+	position : absolute;
+	width    : 1px;
+}
+
+.wrapper {
+	font-size : 0; /*Needed to properly stack the objects on top of each other*/
+}
+
+.wrapper img.placeholder {
+	width  : 100%;
+	height : auto;
+}
+
+.slider {
+	position : relative;
+}
+
+.slider .ticker {
+	/*will-change: opacity;*//*Can't use this - first slide blinks in both Chrome and IE 11.*/
+	position : absolute;
+	bottom   : 10px;
+	right    : 10%;
+
+	opacity  : 0;
+	margin   : 0;
+	padding  : 0;
+}
+
+.slider .tick {
+	cursor  : pointer;
+	display : inline-block;
+}
+
+.slider .tick,
+.slider .tick svg {
+	margin : 0;
+	width  : 20px;
+	height : 20px;
+}
+
+.slider .tick svg .center {
+	fill : #fff;
+}
+
+.slider .tick svg .border,
+.slider .tick.active svg .center {
+	fill : #3c9;
+}
+
+.slide {
+	/*
+		Don't use display:none on OBJECT because it won't load the data in such case.
+	*/
+	width   : 100%;
+	height  : 100%;
+
+	/*Gets around an additional 10fps (54fps) but I can't see any difference in smoothness.
+	What it does is skip the animation of the first frame, causing a jerk when the first slider appears
+	the second time around*/
+	/*will-change: opacity;*/
+	/*-webkit-backface-visibility: hidden;*/
+	/*-webkit-perspective: 1000;*/
+	/*-webkit-transform: translate3d(0,0,0);*/
+	opacity : 0;
+}
+
+.slide.animated:not(:first-child) {
+	margin-top : -100%
+}
+
+.slider svg + .slide.animated {
+	margin-top : 0;
+}
+
+.slide[data-is-loaded] {
+	display : inline;
+}
+
+.slider .show {
+	opacity : 1;
+}
+
+.animated {
+	backface-visibility : hidden;
+	animation-duration  : 2s;
+	animation-fill-mode : both;
+}
+
+@-webkit-keyframes fadeIn {
+	from {
+		opacity : 0;
+	}
+
+	to {
+		opacity : 1;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity : 0;
+	}
+
+	to {
+		opacity : 1;
+	}
+}
+
+.fadeIn {
+	animation-name : fadeIn;
+}
+
+@media only screen
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+	/*44px is minimum target size recommended by Apple*/
+	/* uncss:ignore */
+	.slider .tick,
+	.slider .tick svg {
+		width  : 54px;
+		height : 54px;
+	}
+}
+
+@media only screen
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+	/*44px is minimum target size recommended by Apple*/
+	/* uncss:ignore */
+	.slider .tick,
+	.slider .tick svg {
+		width  : 44px;
+		height : 44px;
+	}
+}

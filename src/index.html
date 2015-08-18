@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html lang="en" class="ie9">
+<![endif]-->
+<![if !IE]>
+<html lang="en">
+<![endif]>
+<head>
+	<meta charset="UTF-8">
+	<!-- build:css -->
+	<link rel="stylesheet" href="../bower_components/normalize.css/normalize.css"/>
+	<!-- endbuild -->
+	<link rel="stylesheet" href="css/style.css"/>
+
+	<title>Slider Demo</title>
+</head>
+<body>
+<div class="slider">
+	<div class="wrapper">
+		<!-- The below SVG is just there as a placeholder, otherwise the below elements will jump around as the images load and take up space
+		Note that the viewBox-property needs to be identical to the SVG-files of the OBJECT.
+		BASE64 encode the below SVG and include it as the IMG SRC to properly work in IE as well. (Other browsers handle inline SVG already, this is a workaround)
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 430" preserveAspectRatio="xMidYMid meet"></svg>-->
+		<img class="placeholder" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5NTAgNDMwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij48L3N2Zz4=" alt=""/>
+		<object class="slide visuallyhidden" onload="this.setAttribute('data-is-loaded', 'true')" type="image/svg+xml" data="https://img1.lenslogistics.com/SE/images/campaign/svg/erbjudande-solglasogon-pa-kopet.svg">Erbjudande! Solglasögon påköpet av 4 linsboxar!</object>
+		<object class="slide visuallyhidden" onload="this.setAttribute('data-is-loaded', 'true')" type="image/svg+xml" data="svg/europas-ledande-online-butik.svg">Europas ledande online butik</object>
+		<object class="slide visuallyhidden" onload="this.setAttribute('data-is-loaded', 'true')" type="image/svg+xml" data="https://img1.lenslogistics.com/SE/images/campaign/svg/erbjudande-solglasogon-pa-kopet.svg">Erbjudande! Solglasögon påköpet av 4 linsboxar!</object>
+		<object class="slide visuallyhidden" onload="this.setAttribute('data-is-loaded', 'true')" type="image/svg+xml" data="svg/europas-ledande-online-butik.svg">Europas ledande online butik</object>
+	</div>
+	<ol class="ticker animated"></ol>
+</div>
+<div style="height: 40px; background: red"><h1>this is NOT supposed to jump as the page is loaded!</h1></div>
+
+
+<!--Needed for Safari and IE -->
+<!-- TODO
+Conditionally load this on just the browsers that require it
+-->
+<!-- build:closest -->
+<script src="app/polyfill/closest.js"></script>
+<!-- endbuild -->
+<!--[if IE]>
+<!-- build:classList -->
+<script src="app/polyfill/classList.js"></script>
+<!-- endbuild -->
+<![endif]-->
+<!-- build:js -->
+<script defer="" async="" data-main="app" src="../bower_components/requirejs/require.js"></script>
+<!-- endbuild -->
+<noscript>
+	<!--At least show the first slide if JS is disabled -->
+	<style>
+		.wrapper .placeholder{
+			display: none;
+		}
+
+		.placeholder + .visuallyhidden {
+			border   : 0;
+			clip     : auto;
+			height   : auto;
+			margin   : inherit;
+			overflow : inherit;
+			padding  : inherit;
+			position : static;
+			width    : auto;
+		}
+		.placeholder + .visuallyhidden{
+			opacity: 1;
+		}
+	</style>
+</noscript>
+</body>
+</html>
